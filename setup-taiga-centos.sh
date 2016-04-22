@@ -92,7 +92,7 @@ SERVER_EMAIL = DEFAULT_FROM_EMAIL
 
 DATABASES = {
     'default': {
-        'ENGINE': 'transaction_hooks.backends.postgresql_psycopg2',
+        'ENGINE': 'django.db.backends.postgresql',
         'NAME': 'taiga',
         'USER': 'taiga',
         'PASSWORD': 'vvf2_zBv5qUQJcYLZkM7',
