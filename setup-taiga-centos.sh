@@ -68,11 +68,11 @@ cat > /home/taiga/taiga-back/settings/local.py << EOF
 from .development import *
 from .common import *
 
-MEDIA_URL = "http://127.0.0.1/media/"
-STATIC_URL = "http://127.0.0.1/static/"
-ADMIN_MEDIA_PREFIX = "http://127.0.0.1/static/admin/"
+MEDIA_URL = "http://192.168.55.10/media/"
+STATIC_URL = "http://192.168.55.10/static/"
+ADMIN_MEDIA_PREFIX = "http://192.168.55.10/static/admin/"
 SITES["front"]["scheme"] = "http"
-SITES["front"]["domain"] = "127.0.0.1"
+SITES["front"]["domain"] = "192.168.55.10"
 
 SECRET_KEY = "CZWlOvqpak_vXAIeWF9Z"
 
@@ -129,7 +129,7 @@ git clone https://github.com/taigaio/taiga-front-dist.git taiga-front-dist
 cd taiga-front-dist/
 git checkout stable
 cd dist/
-sed -e 's/localhost/127.0.0.1/' conf.example.json > conf.json
+sed -e 's/localhost/192.168.55.10/' conf.example.json > conf.json
 
 #circus
 cd /home/taiga
@@ -215,7 +215,7 @@ server {
         proxy_set_header X-Scheme $scheme;
         proxy_set_header X-Forwarded-Proto $scheme;
         proxy_set_header X-Forwarded-For $proxy_add_x_forwarded_for;
-        proxy_pass http://127.0.0.1:8001/api;
+        proxy_pass http://192.168.55.10:8001/api;
         proxy_redirect off;
     }
 
@@ -226,7 +226,7 @@ server {
         proxy_set_header X-Scheme $scheme;
         proxy_set_header X-Forwarded-Proto $scheme;
         proxy_set_header X-Forwarded-For $proxy_add_x_forwarded_for;
-        proxy_pass http://127.0.0.1:8001$request_uri;
+        proxy_pass http://192.168.55.10:8001$request_uri;
         proxy_redirect off;
     }
 
