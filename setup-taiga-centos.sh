@@ -64,13 +64,6 @@ chown -R taiga:taiga /home/taiga/
 
 sed -i -e '1a #!/opt/python3.5/bin/python3.5' -e '1d' manage.py
 
-su taiga -c "python3.5 manage.py migrate --noinput"
-su taiga -c "python3.5 manage.py loaddata initial_user"
-su taiga -c "python3.5 manage.py loaddata initial_project_templates"
-su taiga -c "python3.5 manage.py loaddata initial_role"
-su taiga -c "python3.5 manage.py compilemessages"
-su taiga -c "python3.5 manage.py collectstatic --noinput"
-
 cat > /home/taiga/taiga-back/settings/local.py << EOF
 from .development import *
 from .common import *
@@ -101,6 +94,15 @@ DATABASES = {
     }
 }
 EOF
+
+chown taiga.taiga /home/taiga/taiga-back/settings/local.py
+
+su taiga -c "python3.5 manage.py migrate --noinput"
+su taiga -c "python3.5 manage.py loaddata initial_user"
+su taiga -c "python3.5 manage.py loaddata initial_project_templates"
+su taiga -c "python3.5 manage.py loaddata initial_role"
+su taiga -c "python3.5 manage.py compilemessages"
+su taiga -c "python3.5 manage.py collectstatic --noinput"
 
 #libzmq
 cd /home/taiga/
